@@ -1,0 +1,28 @@
+{
+  "name": "shree-krishna-agro-backend",
+  "version": "1.0.0",
+  "description": "Order Management System Backend for Shree Krishna Agro Pvt. Ltd.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "migrate": "node ../database/migrate.js",
+    "seed": "node ../database/seeds/seed.js",
+    "test": "node --test tests/integration.test.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.11.0",
+    "pdfkit": "^0.15.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
