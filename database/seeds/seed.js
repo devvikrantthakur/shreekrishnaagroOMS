@@ -82,10 +82,10 @@ async function seedDatabase() {
          VALUES (?, ?, ?, ?, ?, ?)`,
         [
           crypto.randomUUID(),
-          'SHREE KRISHNA AGRO PVT. LTD.',
-          'Plot 42, APMC Market Yard, Nashik Road, Maharashtra - 422101',
-          '+91 98200 11223',
-          'billing@shrikrishnaagro.local',
+          'Shree Krishna Agro',
+          '1/3, Vijay Nagar, Near Satyam Gas Agency,\nOpposite Sanskar Girls Hostel,\nIndore, Madhya Pradesh – 452010, India.',
+          '7400606277',
+          '',
           '27AABCS1429B1ZS',
         ]
       );

@@ -103,25 +103,25 @@ export default function DeliveriesPage() {
     <div className="space-y-5">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Delivery Management</h1>
-          <p className="text-sm text-slate-500">
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Delivery Management</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400">
             Manage delivery queue, record partial/full deliveries, and deduct actual delivered stock
           </p>
         </div>
 
-        <div className="flex bg-white p-1 rounded-xl border border-slate-200">
+        <div className="flex bg-white dark:bg-slate-900 p-1 rounded-xl border border-slate-200 dark:border-slate-800">
           <button
             onClick={() => setTab('queue')}
-            className={`px-4 py-1.5 rounded-lg text-sm font-semibold ${
-              tab === 'queue' ? 'bg-agro-600 text-white' : 'text-slate-600'
+            className={`px-4 py-1.5 rounded-lg text-sm font-semibold transition ${
+              tab === 'queue' ? 'bg-agro-600 text-white shadow-xs' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             Delivery Queue
           </button>
           <button
             onClick={() => setTab('history')}
-            className={`px-4 py-1.5 rounded-lg text-sm font-semibold ${
-              tab === 'history' ? 'bg-agro-600 text-white' : 'text-slate-600'
+            className={`px-4 py-1.5 rounded-lg text-sm font-semibold transition ${
+              tab === 'history' ? 'bg-agro-600 text-white shadow-xs' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             Delivery History
@@ -328,7 +328,7 @@ export default function DeliveriesPage() {
               <button
                 type="button"
                 onClick={() => setDelivModal(null)}
-                className="px-4 py-2 rounded-xl bg-slate-100 text-sm"
+                className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200/60 dark:border-slate-700 text-sm font-medium transition"
               >
                 Cancel
               </button>

@@ -15,8 +15,8 @@ import {
 } from 'lucide-react';
 import {
   ResponsiveContainer,
-  AreaChart,
-  Area,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -30,28 +30,28 @@ import { LoadingSpinner } from '../../components/common/Feedback';
 
 function MetricCard({ title, value, subtitle, icon: Icon, color = 'agro', to = null }) {
   const colors = {
-    agro: 'bg-agro-50 text-agro-700',
-    sky: 'bg-sky-50 text-sky-700',
-    amber: 'bg-amber-50 text-amber-700',
-    red: 'bg-red-50 text-red-700',
-    purple: 'bg-purple-50 text-purple-700',
-    emerald: 'bg-emerald-50 text-emerald-700',
+    agro: 'bg-agro-50 text-agro-700 dark:bg-agro-950/60 dark:text-agro-400',
+    sky: 'bg-sky-50 text-sky-700 dark:bg-sky-950/60 dark:text-sky-400',
+    amber: 'bg-amber-50 text-amber-700 dark:bg-amber-950/60 dark:text-amber-400',
+    red: 'bg-red-50 text-red-700 dark:bg-red-950/60 dark:text-red-400',
+    purple: 'bg-purple-50 text-purple-700 dark:bg-purple-950/60 dark:text-purple-400',
+    emerald: 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-400',
   };
 
   const inner = (
-    <div className="bg-white rounded-2xl border border-slate-200/80 p-3.5 sm:p-4 shadow-sm hover:shadow-md transition h-full flex flex-col justify-between min-w-0">
+    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 p-3.5 sm:p-4 shadow-sm hover:shadow-md transition h-full flex flex-col justify-between min-w-0">
       <div className="flex items-start justify-between gap-2 min-w-0">
         <div className="min-w-0 flex-1">
-          <p className="text-[11px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wide truncate">
+          <p className="text-[11px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide truncate">
             {title}
           </p>
-          <p className="text-base sm:text-xl font-bold text-slate-900 mt-1 truncate">{value}</p>
+          <p className="text-base sm:text-xl font-bold text-slate-900 dark:text-white mt-1 truncate">{value}</p>
         </div>
         <div className={`p-2 sm:p-2.5 rounded-xl shrink-0 ${colors[color] || colors.agro}`}>
           <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
         </div>
       </div>
-      {subtitle && <p className="text-[11px] sm:text-xs text-slate-500 mt-2 line-clamp-2">{subtitle}</p>}
+      {subtitle && <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 mt-2 line-clamp-2">{subtitle}</p>}
     </div>
   );
 
@@ -85,8 +85,8 @@ export default function DashboardPage() {
     <div className="space-y-5 sm:space-y-6 min-w-0">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="min-w-0">
-          <h1 className="text-xl sm:text-2xl font-bold text-slate-900">Executive Dashboard</h1>
-          <p className="text-xs sm:text-sm text-slate-500">
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Executive Dashboard</h1>
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
             Live operational &amp; accounting overview for Shree Krishna Agro Pvt. Ltd.
           </p>
         </div>
@@ -201,54 +201,68 @@ export default function DashboardPage() {
 
       {/* Chart + Shortages */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
-        <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-sm overflow-hidden min-w-0">
-          <h2 className="font-bold text-slate-900 mb-4 text-sm sm:text-base">
+        <div className="lg:col-span-2 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 sm:p-5 shadow-sm overflow-hidden min-w-0 transition-colors">
+          <h2 className="font-bold text-slate-900 dark:text-white mb-4 text-sm sm:text-base">
             Delivered Sales Trend (Last 14 Days)
           </h2>
           <div className="h-56 sm:h-64 min-w-0">
             {salesChart.length === 0 ? (
-              <div className="h-full flex items-center justify-center text-sm text-slate-400">
+              <div className="h-full flex items-center justify-center text-sm text-slate-400 dark:text-slate-500">
                 No deliveries recorded in the last 14 days yet.
               </div>
             ) : (
               <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={salesChart}>
-                  <defs>
-                    <linearGradient id="salesGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#16a34a" stopOpacity={0.3} />
-                      <stop offset="95%" stopColor="#16a34a" stopOpacity={0} />
-                    </linearGradient>
-                  </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-                  <XAxis dataKey="date" tick={{ fontSize: 11 }} />
-                  <YAxis tick={{ fontSize: 11 }} />
-                  <Tooltip formatter={(v) => formatCurrency(v)} />
-                  <Area
+                <LineChart data={salesChart} margin={{ top: 10, right: 10, left: -15, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#94a3b8" strokeOpacity={0.25} />
+                  <XAxis
+                    dataKey="date"
+                    tick={{ fontSize: 11, fill: '#94a3b8' }}
+                    stroke="#94a3b8"
+                    strokeOpacity={0.4}
+                  />
+                  <YAxis
+                    tick={{ fontSize: 11, fill: '#94a3b8' }}
+                    stroke="#94a3b8"
+                    strokeOpacity={0.4}
+                  />
+                  <Tooltip
+                    formatter={(v) => [formatCurrency(v), 'Delivered Sales']}
+                    contentStyle={{
+                      backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                      borderColor: '#334155',
+                      borderRadius: '0.75rem',
+                      color: '#f8fafc',
+                      fontSize: '12px',
+                    }}
+                    labelStyle={{ color: '#cbd5e1', fontWeight: 600 }}
+                  />
+                  <Line
                     type="monotone"
                     dataKey="sales"
+                    name="Delivered Sales"
                     stroke="#16a34a"
-                    strokeWidth={2}
-                    fillOpacity={1}
-                    fill="url(#salesGrad)"
+                    strokeWidth={3}
+                    dot={{ r: 4, fill: '#16a34a', strokeWidth: 2, stroke: '#ffffff' }}
+                    activeDot={{ r: 6, fill: '#15803d', stroke: '#ffffff', strokeWidth: 2 }}
                   />
-                </AreaChart>
+                </LineChart>
               </ResponsiveContainer>
             )}
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm flex flex-col transition-colors">
           <div className="flex items-center justify-between mb-3">
-            <h2 className="font-bold text-slate-900">Purchase Shortages</h2>
+            <h2 className="font-bold text-slate-900 dark:text-white">Purchase Shortages</h2>
             <Link
               to="/admin/purchase-requirements"
-              className="text-xs font-semibold text-agro-700 hover:underline flex items-center gap-1"
+              className="text-xs font-semibold text-agro-700 dark:text-agro-400 hover:underline flex items-center gap-1"
             >
               View All <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
           {shortagePreview.length === 0 ? (
-            <div className="flex-1 flex items-center justify-center text-sm text-emerald-700 bg-emerald-50 rounded-xl p-4 text-center">
+            <div className="flex-1 flex items-center justify-center text-sm text-emerald-700 dark:text-white bg-emerald-50 dark:bg-slate-800/80 border border-emerald-200 dark:border-slate-700 rounded-xl p-4 text-center">
               All confirmed order demand is covered by available stock!
             </div>
           ) : (
@@ -256,18 +270,18 @@ export default function DashboardPage() {
               {shortagePreview.map((item) => (
                 <div
                   key={item.vegetable_id}
-                  className="p-3 rounded-xl bg-red-50/70 border border-red-100 flex items-center justify-between"
+                  className="p-3 rounded-xl bg-red-50/70 dark:bg-red-950/40 border border-red-100 dark:border-red-900/60 flex items-center justify-between"
                 >
                   <div>
-                    <div className="font-semibold text-slate-900 text-sm">{item.vegetable_name}</div>
-                    <div className="text-xs text-slate-500">
+                    <div className="font-semibold text-slate-900 dark:text-white text-sm">{item.vegetable_name}</div>
+                    <div className="text-xs text-slate-500 dark:text-slate-400">
                       Req: {formatQty(item.total_confirmed_demand, item.base_unit)} | Avail:{' '}
                       {formatQty(item.available_unallocated_stock, item.base_unit)}
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-xs font-semibold text-red-700">Shortage</div>
-                    <div className="text-sm font-bold text-red-700">
+                    <div className="text-xs font-semibold text-red-700 dark:text-red-400">Shortage</div>
+                    <div className="text-sm font-bold text-red-700 dark:text-red-400">
                       {formatQty(item.purchase_shortage, item.base_unit)}
                     </div>
                   </div>
@@ -279,31 +293,31 @@ export default function DashboardPage() {
       </div>
 
       {/* Recent Orders */}
-      <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-        <div className="px-4 sm:px-5 py-3.5 sm:py-4 border-b border-slate-100 flex items-center justify-between gap-2">
-          <h2 className="font-bold text-slate-900 text-sm sm:text-base">Recent Customer Orders</h2>
-          <Link to="/admin/orders" className="text-xs font-semibold text-agro-700 hover:underline shrink-0">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm transition-colors">
+        <div className="px-4 sm:px-5 py-3.5 sm:py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
+          <h2 className="font-bold text-slate-900 dark:text-white text-sm sm:text-base">Recent Customer Orders</h2>
+          <Link to="/admin/orders" className="text-xs font-semibold text-agro-700 dark:text-agro-400 hover:underline shrink-0">
             Manage All →
           </Link>
         </div>
 
         {/* Mobile Cards */}
-        <div className="sm:hidden divide-y divide-slate-100">
+        <div className="sm:hidden divide-y divide-slate-100 dark:divide-slate-800">
           {recentOrders.map((ord) => (
             <Link
               key={ord.id}
               to={`/admin/orders/${ord.id}`}
-              className="block p-3.5 hover:bg-slate-50/70 transition"
+              className="block p-3.5 hover:bg-slate-50/70 dark:hover:bg-slate-800/70 transition"
             >
               <div className="flex items-center justify-between gap-2">
-                <span className="font-semibold text-sm text-agro-700 truncate">{ord.order_number}</span>
+                <span className="font-semibold text-sm text-agro-700 dark:text-agro-400 truncate">{ord.order_number}</span>
                 <StatusBadge status={ord.status} />
               </div>
-              <div className="flex items-center justify-between gap-2 mt-1.5 text-xs text-slate-600">
-                <span className="truncate font-medium text-slate-800">{ord.customer_name}</span>
-                <span className="font-bold text-slate-900 shrink-0">{formatCurrency(ord.total_amount)}</span>
+              <div className="flex items-center justify-between gap-2 mt-1.5 text-xs text-slate-600 dark:text-slate-400">
+                <span className="truncate font-medium text-slate-800 dark:text-slate-200">{ord.customer_name}</span>
+                <span className="font-bold text-slate-900 dark:text-white shrink-0">{formatCurrency(ord.total_amount)}</span>
               </div>
-              <div className="text-[11px] text-slate-400 mt-1">{formatDateTime(ord.created_at)}</div>
+              <div className="text-[11px] text-slate-400 dark:text-slate-500 mt-1">{formatDateTime(ord.created_at)}</div>
             </Link>
           ))}
         </div>
@@ -311,7 +325,7 @@ export default function DashboardPage() {
         {/* Desktop Table */}
         <div className="hidden sm:block overflow-x-auto">
           <table className="w-full text-sm text-left">
-            <thead className="bg-slate-50 text-xs uppercase text-slate-500">
+            <thead className="bg-slate-50 dark:bg-slate-800 text-xs uppercase text-slate-500 dark:text-slate-400">
               <tr>
                 <th className="px-4 py-3">Order #</th>
                 <th className="px-4 py-3">Customer</th>
@@ -320,18 +334,18 @@ export default function DashboardPage() {
                 <th className="px-4 py-3 text-right">Amount</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {recentOrders.map((ord) => (
-                <tr key={ord.id} className="hover:bg-slate-50/60">
+                <tr key={ord.id} className="hover:bg-slate-50/60 dark:hover:bg-slate-800/60">
                   <td className="px-4 py-3 font-semibold">
-                    <Link to={`/admin/orders/${ord.id}`} className="text-agro-700 hover:underline">
+                    <Link to={`/admin/orders/${ord.id}`} className="text-agro-700 dark:text-agro-400 hover:underline">
                       {ord.order_number}
                     </Link>
                   </td>
-                  <td className="px-4 py-3">{ord.customer_name}</td>
-                  <td className="px-4 py-3 text-slate-500">{formatDateTime(ord.created_at)}</td>
+                  <td className="px-4 py-3 text-slate-800 dark:text-slate-200">{ord.customer_name}</td>
+                  <td className="px-4 py-3 text-slate-500 dark:text-slate-400">{formatDateTime(ord.created_at)}</td>
                   <td className="px-4 py-3"><StatusBadge status={ord.status} /></td>
-                  <td className="px-4 py-3 text-right font-semibold">{formatCurrency(ord.total_amount)}</td>
+                  <td className="px-4 py-3 text-right font-semibold text-slate-900 dark:text-white">{formatCurrency(ord.total_amount)}</td>
                 </tr>
               ))}
             </tbody>

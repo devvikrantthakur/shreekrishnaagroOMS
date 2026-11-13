@@ -53,14 +53,14 @@ export default function AdminOrdersPage() {
   return (
     <div className="space-y-5">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Customer Orders</h1>
-        <p className="text-sm text-slate-500">
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Customer Orders</h1>
+        <p className="text-sm text-slate-500 dark:text-slate-400">
           Confirm, edit, allocate stock, deliver, invoice and track customer orders
         </p>
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
         <div className="relative">
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
           <input
@@ -68,13 +68,13 @@ export default function AdminOrdersPage() {
             value={filters.search}
             onChange={(e) => setFilters({ ...filters, search: e.target.value, page: 1 })}
             placeholder="Order #, customer, mobile..."
-            className="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-200 text-sm"
+            className="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm"
           />
         </div>
         <select
           value={filters.status}
           onChange={(e) => setFilters({ ...filters, status: e.target.value, page: 1 })}
-          className="px-3 py-2 rounded-xl border border-slate-200 text-sm"
+          className="px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm"
         >
           <option value="">All Order Statuses</option>
           <option value="PENDING">PENDING</option>
@@ -87,7 +87,7 @@ export default function AdminOrdersPage() {
         <select
           value={filters.paymentStatus}
           onChange={(e) => setFilters({ ...filters, paymentStatus: e.target.value, page: 1 })}
-          className="px-3 py-2 rounded-xl border border-slate-200 text-sm"
+          className="px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm"
         >
           <option value="">All Payment Statuses</option>
           <option value="PAID">Paid</option>
@@ -98,13 +98,13 @@ export default function AdminOrdersPage() {
           type="date"
           value={filters.dateFrom}
           onChange={(e) => setFilters({ ...filters, dateFrom: e.target.value, page: 1 })}
-          className="px-3 py-2 rounded-xl border border-slate-200 text-sm"
+          className="px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm"
         />
         <input
           type="date"
           value={filters.dateTo}
           onChange={(e) => setFilters({ ...filters, dateTo: e.target.value, page: 1 })}
-          className="px-3 py-2 rounded-xl border border-slate-200 text-sm"
+          className="px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm"
         />
       </div>
 
@@ -113,10 +113,10 @@ export default function AdminOrdersPage() {
       ) : orders.length === 0 ? (
         <EmptyState title="No orders found" description="Try adjusting your filters." />
       ) : (
-        <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
           <div className="overflow-x-auto">
             <table className="w-full text-sm text-left">
-              <thead className="bg-slate-50 border-b border-slate-200 text-xs uppercase text-slate-500">
+              <thead className="bg-slate-50 dark:bg-slate-800/70 border-b border-slate-200 dark:border-slate-800 text-xs uppercase text-slate-500 dark:text-slate-400">
                 <tr>
                   <th className="px-4 py-3">Order #</th>
                   <th className="px-4 py-3">Customer</th>
@@ -129,26 +129,26 @@ export default function AdminOrdersPage() {
                   <th className="px-4 py-3 text-right">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {orders.map((ord) => (
-                  <tr key={ord.id} className="hover:bg-slate-50/60">
-                    <td className="px-4 py-3 font-semibold text-slate-900">{ord.order_number}</td>
+                  <tr key={ord.id} className="hover:bg-slate-50/60 dark:hover:bg-slate-800/50">
+                    <td className="px-4 py-3 font-semibold text-slate-900 dark:text-white">{ord.order_number}</td>
                     <td className="px-4 py-3">
-                      <div className="font-medium text-slate-900">{ord.customer_name}</div>
-                      <div className="text-xs text-slate-500">{ord.customer_mobile}</div>
+                      <div className="font-medium text-slate-900 dark:text-white">{ord.customer_name}</div>
+                      <div className="text-xs text-slate-500 dark:text-slate-400">{ord.customer_mobile}</div>
                     </td>
-                    <td className="px-4 py-3 text-slate-500">{formatDateTime(ord.created_at)}</td>
-                    <td className="px-4 py-3">{ord.item_count}</td>
+                    <td className="px-4 py-3 text-slate-500 dark:text-slate-400">{formatDateTime(ord.created_at)}</td>
+                    <td className="px-4 py-3 text-slate-700 dark:text-slate-300">{ord.item_count}</td>
                     <td className="px-4 py-3"><StatusBadge status={ord.status} /></td>
-                    <td className="px-4 py-3 text-right font-semibold">{formatCurrency(ord.total_amount)}</td>
-                    <td className="px-4 py-3 text-right text-emerald-700">{formatCurrency(ord.net_paid)}</td>
-                    <td className="px-4 py-3 text-right font-semibold text-red-600">
+                    <td className="px-4 py-3 text-right font-semibold text-slate-900 dark:text-white">{formatCurrency(ord.total_amount)}</td>
+                    <td className="px-4 py-3 text-right text-emerald-600 dark:text-emerald-400 font-medium">{formatCurrency(ord.net_paid)}</td>
+                    <td className="px-4 py-3 text-right font-semibold text-red-600 dark:text-red-400">
                       {formatCurrency(ord.balance_due)}
                     </td>
                     <td className="px-4 py-3 text-right">
                       <Link
                         to={`/admin/orders/${ord.id}`}
-                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-agro-50 text-agro-700 hover:bg-agro-100 text-xs font-semibold"
+                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-agro-50 dark:bg-slate-800 text-agro-700 dark:text-white hover:bg-agro-100 dark:hover:bg-slate-700 text-xs font-semibold"
                       >
                         <Eye className="w-3.5 h-3.5" /> Manage
                       </Link>

@@ -67,15 +67,15 @@ export default function UserDetailPage() {
   return (
     <div className="space-y-6">
       <div>
-        <Link to="/admin/users" className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-800 mb-1">
+        <Link to="/admin/users" className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white mb-1">
           <ArrowLeft className="w-4 h-4" /> Back to Users
         </Link>
         <div className="flex items-center gap-3">
-          <h1 className="text-2xl font-bold text-slate-900">{user.full_name}</h1>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">{user.full_name}</h1>
           <StatusBadge status={user.role} />
           <StatusBadge status={user.status} />
         </div>
-        <p className="text-xs text-slate-500 mt-0.5">
+        <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
           {user.email} • {user.mobile}
         </p>
       </div>
@@ -163,7 +163,7 @@ export default function UserDetailPage() {
             <input type="text" required placeholder="Pincode" value={addrForm.pincode} onChange={(e) => setAddrForm({ ...addrForm, pincode: e.target.value })} className="px-3 py-2 rounded-xl border border-slate-200 text-sm" />
           </div>
           <div className="flex justify-end gap-2 pt-2">
-            <button type="button" onClick={() => setAddrModal(false)} className="px-4 py-2 rounded-xl bg-slate-100 text-sm">Cancel</button>
+            <button type="button" onClick={() => setAddrModal(false)} className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200/60 dark:border-slate-700 text-sm font-medium transition">Cancel</button>
             <button type="submit" className="px-4 py-2 rounded-xl bg-agro-600 text-white text-sm font-semibold">Save</button>
           </div>
         </form>

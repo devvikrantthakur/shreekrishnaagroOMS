@@ -18,11 +18,13 @@ function generateInvoicePdf(invoiceData, res) {
   const { invoice, order, items, company, customer, payments } = invoiceData;
 
   const doc = new PDFDocument({ margin: 40, size: 'A4' });
-  res.setHeader('Content-Type', 'application/pdf');
-  res.setHeader(
-    'Content-Disposition',
-    `attachment; filename="Invoice-${invoice.invoice_number}.pdf"`
-  );
+  if (typeof res.setHeader === 'function') {
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename="Invoice-${invoice.invoice_number}.pdf"`
+    );
+  }
   doc.pipe(res);
 
   const leftX = 55;
@@ -30,11 +32,21 @@ function generateInvoicePdf(invoiceData, res) {
   const rightX = 342;
   const rightWidth = 198;
 
-  const companyName = company?.company_name || 'SHREE KRISHNA AGRO PVT. LTD.';
-  const companyAddr = company?.address || '';
+  const companyName = company?.company_name || 'Shree Krishna Agro';
+  const companyAddr =
+    company?.address ||
+    '1/3, Vijay Nagar, Near Satyam Gas Agency,\nOpposite Sanskar Girls Hostel,\nIndore, Madhya Pradesh – 452010, India.';
   const contactParts = [];
-  if (company?.phone) contactParts.push(`Phone: ${company.phone}`);
-  if (company?.email) contactParts.push(`Email: ${company.email}`);
+  const rawPhone = company?.phone || '7400606277';
+  if (rawPhone) {
+    const formattedPhone = String(rawPhone).trim().startsWith('+91')
+      ? rawPhone.trim()
+      : `+91 ${rawPhone.trim()}`;
+    contactParts.push(`Phone: ${formattedPhone}`);
+  }
+  if (company?.email && !company.email.includes('.local') && company.email.trim() !== '') {
+    contactParts.push(`Email: ${company.email.trim()}`);
+  }
   const contactLine = contactParts.join(' | ');
   const gstinLine = company?.gstin ? `GSTIN: ${company.gstin}` : '';
 

@@ -30,6 +30,19 @@ app.use('/uploads', express.static(path.resolve(env.uploadDir)));
 // API v1
 app.use('/api/v1', routes);
 
+// Serve frontend production build if available
+const frontendDist = path.resolve(__dirname, '../../frontend/dist');
+const fs = require('fs');
+if (fs.existsSync(frontendDist)) {
+  app.use(express.static(frontendDist));
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) {
+      return next();
+    }
+    res.sendFile(path.join(frontendDist, 'index.html'));
+  });
+}
+
 app.use(notFoundHandler);
 app.use(errorHandler);
 

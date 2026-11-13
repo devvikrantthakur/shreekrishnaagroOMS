@@ -90,25 +90,25 @@ export default function InventoryPage() {
     <div className="space-y-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Inventory & Stock Ledger</h1>
-          <p className="text-sm text-slate-500">
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Inventory & Stock Ledger</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400">
             Real-time stock calculated from stock_movements ledger with reserved allocation tracking
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <div className="flex bg-white p-1 rounded-xl border border-slate-200">
+          <div className="flex bg-white dark:bg-slate-900 p-1 rounded-xl border border-slate-200 dark:border-slate-800">
             <button
               onClick={() => setTab('summary')}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold ${
-                tab === 'summary' ? 'bg-agro-600 text-white' : 'text-slate-600'
+              className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition ${
+                tab === 'summary' ? 'bg-agro-600 text-white shadow-xs' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               Stock Summary
             </button>
             <button
               onClick={() => setTab('movements')}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold ${
-                tab === 'movements' ? 'bg-agro-600 text-white' : 'text-slate-600'
+              className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition ${
+                tab === 'movements' ? 'bg-agro-600 text-white shadow-xs' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
               Movement Ledger
@@ -335,7 +335,7 @@ export default function InventoryPage() {
             <button
               type="button"
               onClick={() => setAdjModal(false)}
-              className="px-4 py-2 rounded-xl bg-slate-100 text-sm"
+              className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200/60 dark:border-slate-700 text-sm font-medium transition"
             >
               Cancel
             </button>

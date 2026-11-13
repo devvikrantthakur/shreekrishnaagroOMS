@@ -90,11 +90,12 @@ cd backend
 npm run dev
 ```
 
-In terminal 2 (Frontend Vite dev server on port `5173`):
+In terminal 2 (Frontend on port `5173`):
 ```bash
 cd frontend
 npm run dev
 ```
+> *Note on Source Protection:* `npm run dev` automatically compiles and serves the single-bundle obfuscated build with proxying to backend (`http://localhost:5000`). In browser DevTools (Sources tab), no `src/` directory, no component filenames, and zero `import` statements are exposed. For raw local development with Vite HMR, you can run `npm run dev:raw`.
 
 Open **http://localhost:5173** in your browser.
 

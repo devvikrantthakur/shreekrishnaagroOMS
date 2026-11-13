@@ -34,8 +34,8 @@ export default function CustomerPaymentsPage() {
   return (
     <div className="space-y-5">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Payment History</h1>
-        <p className="text-sm text-slate-500">All payments & refunds recorded against your orders</p>
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Payment History</h1>
+        <p className="text-sm text-slate-500 dark:text-slate-400">All payments & refunds recorded against your orders</p>
       </div>
 
       {loading ? (
@@ -49,26 +49,26 @@ export default function CustomerPaymentsPage() {
             {payments.map((p) => (
               <div
                 key={p.id}
-                className="bg-white rounded-2xl border border-slate-200 p-4 shadow-xs space-y-2"
+                className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 shadow-xs space-y-2"
               >
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
-                    <div className="font-bold text-slate-900 text-sm truncate">{p.payment_number}</div>
+                    <div className="font-bold text-slate-900 dark:text-white text-sm truncate">{p.payment_number}</div>
                     <Link
                       to={`/orders/${p.order_id}`}
-                      className="text-xs text-agro-700 font-semibold hover:underline"
+                      className="text-xs text-agro-700 dark:text-agro-400 font-semibold hover:underline"
                     >
                       Order: {p.order_number}
                     </Link>
                   </div>
                   <StatusBadge status={p.status} />
                 </div>
-                <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
-                  <div className="text-slate-500">
+                <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-800 text-xs">
+                  <div className="text-slate-500 dark:text-slate-400">
                     {p.payment_method} • {formatDateTime(p.payment_date)}
                     {p.transaction_ref ? ` • Ref: ${p.transaction_ref}` : ''}
                   </div>
-                  <div className="font-bold text-slate-900 text-sm shrink-0">
+                  <div className="font-bold text-slate-900 dark:text-white text-sm shrink-0">
                     {formatCurrency(p.amount)}
                   </div>
                 </div>
@@ -77,10 +77,10 @@ export default function CustomerPaymentsPage() {
           </div>
 
           {/* Desktop Table */}
-          <div className="hidden sm:block bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+          <div className="hidden sm:block bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
             <div className="overflow-x-auto">
               <table className="w-full text-sm text-left">
-                <thead className="bg-slate-50 border-b border-slate-200 text-xs uppercase text-slate-500">
+                <thead className="bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-xs uppercase text-slate-500 dark:text-slate-400">
                   <tr>
                     <th className="px-4 py-3">Payment #</th>
                     <th className="px-4 py-3">Order #</th>
@@ -91,20 +91,20 @@ export default function CustomerPaymentsPage() {
                     <th className="px-4 py-3 text-right">Amount</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                   {payments.map((p) => (
                     <tr key={p.id}>
-                      <td className="px-4 py-3 font-semibold text-slate-900">{p.payment_number}</td>
+                      <td className="px-4 py-3 font-semibold text-slate-900 dark:text-white">{p.payment_number}</td>
                       <td className="px-4 py-3">
-                        <Link to={`/orders/${p.order_id}`} className="text-agro-700 font-medium hover:underline">
+                        <Link to={`/orders/${p.order_id}`} className="text-agro-700 dark:text-agro-400 font-medium hover:underline">
                           {p.order_number}
                         </Link>
                       </td>
-                      <td className="px-4 py-3 text-slate-600">{formatDateTime(p.payment_date)}</td>
-                      <td className="px-4 py-3">{p.payment_method}</td>
-                      <td className="px-4 py-3 text-slate-500">{p.transaction_ref || '-'}</td>
+                      <td className="px-4 py-3 text-slate-600 dark:text-slate-300">{formatDateTime(p.payment_date)}</td>
+                      <td className="px-4 py-3 text-slate-700 dark:text-slate-300">{p.payment_method}</td>
+                      <td className="px-4 py-3 text-slate-500 dark:text-slate-400">{p.transaction_ref || '-'}</td>
                       <td className="px-4 py-3"><StatusBadge status={p.status} /></td>
-                      <td className="px-4 py-3 text-right font-bold text-slate-900">
+                      <td className="px-4 py-3 text-right font-bold text-slate-900 dark:text-white">
                         {formatCurrency(p.amount)}
                       </td>
                     </tr>
@@ -114,7 +114,7 @@ export default function CustomerPaymentsPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-200 px-4 pb-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 px-4 pb-4">
             <Pagination pagination={pagination} onPageChange={setPage} />
           </div>
         </div>

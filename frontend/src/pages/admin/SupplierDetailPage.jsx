@@ -65,11 +65,11 @@ export default function SupplierDetailPage() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <Link to="/admin/suppliers" className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-800 mb-1">
+          <Link to="/admin/suppliers" className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white mb-1">
             <ArrowLeft className="w-4 h-4" /> Back to Suppliers
           </Link>
-          <h1 className="text-2xl font-bold text-slate-900">{supplier.supplier_name}</h1>
-          <p className="text-xs text-slate-500">
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">{supplier.supplier_name}</h1>
+          <p className="text-xs text-slate-500 dark:text-slate-400">
             Contact: {supplier.contact_person || '-'} • {supplier.mobile} • {supplier.address || '-'}
           </p>
         </div>
@@ -210,7 +210,7 @@ export default function SupplierDetailPage() {
             className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm"
           />
           <div className="flex justify-end gap-2 pt-2">
-            <button type="button" onClick={() => setPayModal(false)} className="px-4 py-2 rounded-xl bg-slate-100 text-sm">
+            <button type="button" onClick={() => setPayModal(false)} className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200/60 dark:border-slate-700 text-sm font-medium transition">
               Cancel
             </button>
             <button type="submit" className="px-4 py-2 rounded-xl bg-agro-600 text-white text-sm font-semibold">

@@ -3,10 +3,46 @@ import react from '@vitejs/plugin-react';
 import JavaScriptObfuscator from 'javascript-obfuscator';
 
 function obfuscateAppBundlePlugin() {
+  let isDev = false;
   return {
     name: 'obfuscate-app-bundle',
-    apply: 'build',
     enforce: 'post',
+    configResolved(config) {
+      isDev = config.command === 'serve';
+    },
+    transform(code, id) {
+      // In dev mode (npm run dev), obfuscate application source files so raw code is never visible in DevTools Sources
+      if (
+        isDev &&
+        !id.includes('node_modules') &&
+        (id.endsWith('.jsx') || id.endsWith('.js')) &&
+        (id.includes('/src/') || id.includes('\\src\\'))
+      ) {
+        try {
+          const result = JavaScriptObfuscator.obfuscate(code, {
+            compact: true,
+            controlFlowFlattening: false,
+            deadCodeInjection: false,
+            disableConsoleOutput: false,
+            identifierNamesGenerator: 'hexadecimal',
+            renameGlobals: false,
+            reservedNames: ['$RefreshReg$', '$RefreshSig$', 'React'],
+            simplify: true,
+            stringArray: true,
+            stringArrayEncoding: ['base64'],
+            stringArrayThreshold: 0.8,
+            transformObjectKeys: true,
+          });
+          return {
+            code: result.getObfuscatedCode(),
+            map: null,
+          };
+        } catch {
+          return null;
+        }
+      }
+      return null;
+    },
     generateBundle(_options, bundle) {
       for (const chunk of Object.values(bundle)) {
         if (chunk.type !== 'chunk' || !chunk.code) continue;
@@ -19,16 +55,14 @@ function obfuscateAppBundlePlugin() {
 
         const result = JavaScriptObfuscator.obfuscate(chunk.code, {
           compact: true,
-          controlFlowFlattening: true,
-          controlFlowFlatteningThreshold: 0.5,
+          controlFlowFlattening: false,
           deadCodeInjection: false,
           disableConsoleOutput: true,
           identifierNamesGenerator: 'hexadecimal',
           renameGlobals: false,
           selfDefending: false,
           simplify: true,
-          splitStrings: true,
-          splitStringsChunkLength: 10,
+          splitStrings: false,
           stringArray: true,
           stringArrayCallsTransform: true,
           stringArrayEncoding: ['base64'],
@@ -52,6 +86,7 @@ export default defineConfig({
     legalComments: 'none',
   },
   build: {
+    chunkSizeWarningLimit: 3000,
     sourcemap: false,
     minify: 'esbuild',
     rollupOptions: {
@@ -59,16 +94,30 @@ export default defineConfig({
         entryFileNames: 'assets/[hash].js',
         chunkFileNames: 'assets/[hash].js',
         assetFileNames: 'assets/[hash][extname]',
-        manualChunks(id) {
-          if (!id.includes('node_modules')) return undefined;
-          if (id.includes('lucide-react')) return 'v-icons';
-          return 'v-vendor';
-        },
+        inlineDynamicImports: true,
       },
     },
   },
+  css: {
+    devSourcemap: false,
+  },
   server: {
+    sourcemapIgnoreList: () => true,
     port: 5173,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+      },
+      '/uploads': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+      },
+    },
+  },
+  preview: {
+    port: 5173,
+    host: true,
     proxy: {
       '/api': {
         target: 'http://localhost:5000',

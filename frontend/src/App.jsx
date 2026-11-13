@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { ToastProvider } from './context/ToastContext';
+import { ThemeProvider } from './context/ThemeContext';
 import ProtectedRoute from './components/common/ProtectedRoute';
 
 import CustomerLayout from './components/customer/CustomerLayout';
@@ -40,10 +41,11 @@ import AuditLogsPage from './pages/admin/AuditLogsPage';
 
 export default function App() {
   return (
-    <ToastProvider>
-      <AuthProvider>
-        <CartProvider>
-          <BrowserRouter>
+    <ThemeProvider>
+      <ToastProvider>
+        <AuthProvider>
+          <CartProvider>
+            <BrowserRouter>
             <Routes>
               {/* Auth Routes */}
               <Route path="/login" element={<LoginPage />} />
@@ -130,5 +132,6 @@ export default function App() {
         </CartProvider>
       </AuthProvider>
     </ToastProvider>
-  );
+  </ThemeProvider>
+);
 }

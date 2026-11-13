@@ -136,9 +136,9 @@ export default function ExpensesPage() {
     <div className="space-y-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Expense Management</h1>
-          <p className="text-sm text-slate-500">
-            Filtered Total: <strong className="text-slate-900">{formatCurrency(totalAmount)}</strong>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Expense Management</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400">
+            Filtered Total: <strong className="text-slate-900 dark:text-white">{formatCurrency(totalAmount)}</strong>
           </p>
         </div>
         <button
@@ -299,7 +299,7 @@ export default function ExpensesPage() {
             className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm"
           />
           <div className="flex justify-end gap-2 pt-2">
-            <button type="button" onClick={() => setModalOpen(false)} className="px-4 py-2 rounded-xl bg-slate-100 text-sm">
+            <button type="button" onClick={() => setModalOpen(false)} className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200/60 dark:border-slate-700 text-sm font-medium transition">
               Cancel
             </button>
             <button type="submit" className="px-4 py-2 rounded-xl bg-agro-600 text-white text-sm font-semibold">

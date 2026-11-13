@@ -12,12 +12,12 @@ export function LoadingSpinner({ label = 'Loading...' }) {
 
 export function EmptyState({ title = 'No records found', description = '', action = null }) {
   return (
-    <div className="flex flex-col items-center justify-center py-12 px-4 text-center bg-white rounded-2xl border border-dashed border-slate-200">
-      <div className="p-3 bg-slate-100 rounded-full text-slate-400 mb-3">
+    <div className="flex flex-col items-center justify-center py-12 px-4 text-center bg-white dark:bg-slate-900 rounded-2xl border border-dashed border-slate-200 dark:border-slate-800 transition">
+      <div className="p-3 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-400 dark:text-slate-500 mb-3">
         <Inbox className="w-7 h-7" />
       </div>
-      <h4 className="text-base font-semibold text-slate-800">{title}</h4>
-      {description && <p className="text-sm text-slate-500 mt-1 max-w-md">{description}</p>}
+      <h4 className="text-base font-semibold text-slate-800 dark:text-slate-100">{title}</h4>
+      {description && <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-md">{description}</p>}
       {action && <div className="mt-4">{action}</div>}
     </div>
   );

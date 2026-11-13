@@ -91,18 +91,18 @@ export default function CheckoutPage() {
 
   if (confirmedOrder) {
     return (
-      <div className="max-w-xl mx-auto bg-white rounded-3xl border border-agro-200 shadow-sm p-8 text-center space-y-4">
-        <div className="w-16 h-16 rounded-full bg-agro-100 text-agro-600 flex items-center justify-center mx-auto">
+      <div className="max-w-xl mx-auto bg-white dark:bg-slate-900 rounded-3xl border border-agro-200 dark:border-slate-800 shadow-sm p-8 text-center space-y-4 transition">
+        <div className="w-16 h-16 rounded-full bg-agro-100 dark:bg-agro-950 text-agro-600 dark:text-agro-400 flex items-center justify-center mx-auto">
           <CheckCircle2 className="w-9 h-9" />
         </div>
-        <h2 className="text-2xl font-bold text-slate-900">Order Confirmed!</h2>
-        <p className="text-sm text-slate-600">
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Order Confirmed!</h2>
+        <p className="text-sm text-slate-600 dark:text-slate-300">
           Your order has been placed with Shree Krishna Agro Pvt. Ltd.
         </p>
-        <div className="bg-agro-50 border border-agro-200 rounded-2xl p-4">
-          <div className="text-xs text-agro-700 font-semibold uppercase">Order Number</div>
-          <div className="text-xl font-bold text-agro-900 mt-0.5">{confirmedOrder.order_number}</div>
-          <div className="text-sm text-slate-700 mt-2">
+        <div className="bg-agro-50 dark:bg-agro-950/60 border border-agro-200 dark:border-agro-900 rounded-2xl p-4">
+          <div className="text-xs text-agro-700 dark:text-agro-400 font-semibold uppercase">Order Number</div>
+          <div className="text-xl font-bold text-agro-900 dark:text-agro-200 mt-0.5">{confirmedOrder.order_number}</div>
+          <div className="text-sm text-slate-700 dark:text-slate-300 mt-2">
             Total Amount: <strong>{formatCurrency(confirmedOrder.total_amount)}</strong>
           </div>
         </div>
@@ -115,7 +115,7 @@ export default function CheckoutPage() {
           </Link>
           <Link
             to="/"
-            className="px-5 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-sm font-semibold"
+            className="px-5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-semibold"
           >
             Continue Shopping
           </Link>
@@ -146,18 +146,18 @@ export default function CheckoutPage() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
       <div className="lg:col-span-2 space-y-4 min-w-0">
-        <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5">
-          <h2 className="text-base sm:text-lg font-bold text-slate-900 mb-3 sm:mb-4">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 sm:p-5 transition">
+          <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
             Cart Items ({cart.items.length})
           </h2>
-          <div className="divide-y divide-slate-100">
+          <div className="divide-y divide-slate-100 dark:divide-slate-800">
             {cart.items.map((item) => (
               <div
                 key={item.id}
                 className="py-3.5 sm:py-4 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4"
               >
                 <div className="flex items-center gap-3 flex-1 min-w-0">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-agro-50 overflow-hidden shrink-0">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-agro-50 dark:bg-slate-800 overflow-hidden shrink-0">
                     {item.image_url && (
                       <img
                         src={resolveImageUrl(item.image_url)}
@@ -169,11 +169,11 @@ export default function CheckoutPage() {
                   <div className="flex-1 min-w-0">
                     <Link
                       to={`/vegetables/${item.vegetable_id}`}
-                      className="font-semibold text-sm sm:text-base text-slate-900 hover:text-agro-700 truncate block"
+                      className="font-semibold text-sm sm:text-base text-slate-900 dark:text-slate-100 hover:text-agro-700 dark:hover:text-agro-400 truncate block"
                     >
                       {item.name}
                     </Link>
-                    <div className="text-xs text-slate-500 mt-0.5 truncate">
+                    <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 truncate">
                       {formatCurrency(item.base_unit_price)} / {item.base_unit} •{' '}
                       {formatQty(item.base_quantity, item.base_unit)}
                     </div>
@@ -188,27 +188,27 @@ export default function CheckoutPage() {
                 </div>
 
                 <div className="flex items-center justify-between sm:justify-end gap-2 pl-[4.25rem] sm:pl-0">
-                  <div className="flex items-center border border-agro-600 bg-agro-50/40 rounded-xl overflow-hidden">
+                  <div className="flex items-center border border-agro-600 bg-agro-50/40 dark:bg-agro-950/40 rounded-xl overflow-hidden">
                     <button
                       onClick={() => handleStep(item, -1)}
-                      className="p-2 hover:bg-agro-100 text-agro-700"
+                      className="p-2 hover:bg-agro-100 dark:hover:bg-slate-700 text-agro-700 dark:text-white"
                       aria-label="Decrease quantity"
                     >
                       <Minus className="w-3.5 h-3.5" />
                     </button>
-                    <span className="px-2.5 text-xs font-bold text-slate-900 whitespace-nowrap">
+                    <span className="px-2.5 text-xs font-bold text-slate-900 dark:text-slate-100 whitespace-nowrap">
                       {formatQty(item.quantity, item.unit)}
                     </span>
                     <button
                       onClick={() => handleStep(item, 1)}
-                      className="p-2 hover:bg-agro-100 text-agro-700"
+                      className="p-2 hover:bg-agro-100 dark:hover:bg-slate-700 text-agro-700 dark:text-white"
                       aria-label="Increase quantity"
                     >
                       <Plus className="w-3.5 h-3.5" />
                     </button>
                   </div>
 
-                  <div className="sm:w-24 text-right font-bold text-slate-900 text-sm">
+                  <div className="sm:w-24 text-right font-bold text-slate-900 dark:text-white text-sm">
                     {formatCurrency(item.line_total)}
                   </div>
 
@@ -226,9 +226,9 @@ export default function CheckoutPage() {
         </div>
 
         {/* Delivery Address Selection */}
-        <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 sm:p-5 transition">
           <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-            <h2 className="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+            <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
               <MapPin className="w-5 h-5 text-agro-600 shrink-0" /> Delivery Address
             </h2>
             <div className="flex flex-wrap items-center gap-2">
@@ -238,7 +238,7 @@ export default function CheckoutPage() {
                   setAutoDetectLocation(true);
                   setAddrModalOpen(true);
                 }}
-                className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 px-3 py-1.5 rounded-lg"
+                className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 dark:text-white bg-emerald-50 dark:bg-slate-800 border border-emerald-200 dark:border-slate-700 hover:bg-emerald-100 dark:hover:bg-slate-700 px-3 py-1.5 rounded-lg"
               >
                 <LocateFixed className="w-3.5 h-3.5" /> Current Location
               </button>
@@ -248,7 +248,7 @@ export default function CheckoutPage() {
                   setAutoDetectLocation(false);
                   setAddrModalOpen(true);
                 }}
-                className="text-xs font-semibold text-agro-700 bg-agro-50 hover:bg-agro-100 px-3 py-1.5 rounded-lg"
+                className="text-xs font-semibold text-agro-700 dark:text-agro-400 bg-agro-50 dark:bg-agro-950/60 hover:bg-agro-100 px-3 py-1.5 rounded-lg"
               >
                 + Add Address
               </button>
@@ -256,7 +256,7 @@ export default function CheckoutPage() {
           </div>
 
           {addresses.length === 0 ? (
-            <div className="text-sm text-slate-500 py-4">
+            <div className="text-sm text-slate-500 dark:text-slate-400 py-4">
               No saved addresses found. Click "+ Add New Address" to continue.
             </div>
           ) : (
@@ -266,12 +266,12 @@ export default function CheckoutPage() {
                   key={addr.id}
                   className={`cursor-pointer p-4 rounded-xl border-2 transition ${
                     String(selectedAddressId) === String(addr.id)
-                      ? 'border-agro-600 bg-agro-50/40'
-                      : 'border-slate-200 hover:border-slate-300'
+                      ? 'border-agro-600 bg-agro-50/40 dark:bg-agro-950/40'
+                      : 'border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600'
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold uppercase text-agro-700">{addr.label}</span>
+                    <span className="text-xs font-bold uppercase text-agro-700 dark:text-agro-400">{addr.label}</span>
                     <input
                       type="radio"
                       name="address"
@@ -280,15 +280,15 @@ export default function CheckoutPage() {
                       className="accent-agro-600"
                     />
                   </div>
-                  <div className="font-semibold text-slate-900 text-sm mt-1">{addr.recipient_name}</div>
-                  <div className="text-xs text-slate-600 mt-0.5">
+                  <div className="font-semibold text-slate-900 dark:text-white text-sm mt-1">{addr.recipient_name}</div>
+                  <div className="text-xs text-slate-600 dark:text-slate-300 mt-0.5">
                     {addr.address_line1}
                     {addr.address_line2 ? `, ${addr.address_line2}` : ''}, {addr.city}, {addr.state} -{' '}
                     {addr.pincode}
                   </div>
-                  <div className="text-xs text-slate-500 mt-1">Mobile: {addr.mobile}</div>
+                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Mobile: {addr.mobile}</div>
                   {addr.latitude !== null && addr.latitude !== undefined && addr.longitude !== null && (
-                    <div className="text-[11px] text-agro-700 font-medium mt-1 flex items-center gap-1">
+                    <div className="text-[11px] text-agro-700 dark:text-agro-400 font-medium mt-1 flex items-center gap-1">
                       <LocateFixed className="w-3 h-3" /> GPS Location Attached
                     </div>
                   )}
@@ -301,25 +301,25 @@ export default function CheckoutPage() {
 
       {/* Order Summary */}
       <div className="space-y-4">
-        <div className="bg-white rounded-2xl border border-slate-200 p-5 sticky top-24 space-y-4">
-          <h2 className="text-lg font-bold text-slate-900">Order Summary</h2>
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 sticky top-20 sm:top-24 space-y-4 transition">
+          <h2 className="text-lg font-bold text-slate-900 dark:text-white">Order Summary</h2>
           <div className="space-y-2 text-sm">
-            <div className="flex justify-between text-slate-600">
+            <div className="flex justify-between text-slate-600 dark:text-slate-300">
               <span>Items Subtotal</span>
-              <span className="font-medium text-slate-900">{formatCurrency(cart.subtotal)}</span>
+              <span className="font-medium text-slate-900 dark:text-white">{formatCurrency(cart.subtotal)}</span>
             </div>
-            <div className="flex justify-between text-slate-600">
+            <div className="flex justify-between text-slate-600 dark:text-slate-300">
               <span>Delivery Charges</span>
-              <span className="text-agro-700 font-semibold">FREE</span>
+              <span className="text-agro-700 dark:text-agro-400 font-semibold">FREE</span>
             </div>
-            <div className="border-t border-slate-100 pt-2 flex justify-between text-base font-bold text-slate-900">
+            <div className="border-t border-slate-100 dark:border-slate-800 pt-2 flex justify-between text-base font-bold text-slate-900 dark:text-white">
               <span>Total Payable</span>
               <span>{formatCurrency(cart.subtotal)}</span>
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-600 mb-1">
+            <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">
               Delivery Notes (Optional)
             </label>
             <textarea
@@ -327,7 +327,7 @@ export default function CheckoutPage() {
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder="Morning delivery preferred, call on arrival..."
-              className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm outline-none focus:ring-2 focus:ring-agro-500"
+              className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm outline-none focus:ring-2 focus:ring-agro-500"
             />
           </div>
 

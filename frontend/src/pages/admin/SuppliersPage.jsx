@@ -131,8 +131,8 @@ export default function SuppliersPage() {
     <div className="space-y-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Supplier Management</h1>
-          <p className="text-sm text-slate-500">Manage farm suppliers, purchase history & payables</p>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Supplier Management</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400">Manage farm suppliers, purchase history & payables</p>
         </div>
         <button
           onClick={openAdd}
@@ -309,7 +309,7 @@ export default function SuppliersPage() {
             <option value="INACTIVE">INACTIVE</option>
           </select>
           <div className="flex justify-end gap-2 pt-2">
-            <button type="button" onClick={() => setModalOpen(false)} className="px-4 py-2 rounded-xl bg-slate-100 text-sm">
+            <button type="button" onClick={() => setModalOpen(false)} className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200/60 dark:border-slate-700 text-sm font-medium transition">
               Cancel
             </button>
             <button type="submit" className="px-4 py-2 rounded-xl bg-agro-600 text-white text-sm font-semibold">

@@ -87,13 +87,13 @@ export default function VegetableDetailPage() {
     <div className="max-w-4xl mx-auto space-y-6">
       <Link
         to="/"
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-agro-700"
+        className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-agro-700 dark:hover:text-agro-400"
       >
         <ArrowLeft className="w-4 h-4" /> Back to Vegetables
       </Link>
 
-      <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden grid grid-cols-1 md:grid-cols-2">
-        <div className="bg-agro-50/50 p-6 flex items-center justify-center">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden grid grid-cols-1 md:grid-cols-2 transition-colors">
+        <div className="bg-agro-50/50 dark:bg-slate-800/50 p-6 flex items-center justify-center">
           {veg.image_url ? (
             <img
               src={resolveImageUrl(veg.image_url)}
@@ -101,38 +101,38 @@ export default function VegetableDetailPage() {
               className="w-full max-h-80 object-contain rounded-2xl"
             />
           ) : (
-            <Leaf className="w-24 h-24 text-agro-300" />
+            <Leaf className="w-24 h-24 text-agro-300 dark:text-agro-500" />
           )}
         </div>
 
         <div className="p-6 sm:p-8 flex flex-col">
-          <span className="text-xs font-bold uppercase tracking-wider text-agro-600">
+          <span className="text-xs font-bold uppercase tracking-wider text-agro-600 dark:text-agro-400">
             {veg.category_name}
           </span>
-          <h1 className="text-2xl font-bold text-slate-900 mt-1">{veg.name}</h1>
-          {veg.sku && <div className="text-xs text-slate-400 mt-0.5">SKU: {veg.sku}</div>}
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white mt-1">{veg.name}</h1>
+          {veg.sku && <div className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">SKU: {veg.sku}</div>}
 
           <div className="mt-4 flex items-baseline gap-2">
-            <span className="text-3xl font-bold text-slate-900">
+            <span className="text-3xl font-bold text-slate-900 dark:text-white">
               {formatCurrency(veg.selling_price)}
             </span>
-            <span className="text-sm text-slate-500">
+            <span className="text-sm text-slate-500 dark:text-slate-400">
               per {formatQty(veg.pack_size, veg.unit)}
             </span>
           </div>
 
-          <div className="mt-3 flex items-center gap-2 text-xs font-medium text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-lg w-fit">
+          <div className="mt-3 flex items-center gap-2 text-xs font-medium text-emerald-700 dark:text-white bg-emerald-50 dark:bg-slate-800 border border-emerald-200 dark:border-slate-700 px-3 py-1.5 rounded-lg w-fit">
             <CheckCircle2 className="w-4 h-4" />
             Available Stock: {formatQty(veg.available_stock, veg.base_unit)}
           </div>
 
-          <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+          <p className="text-sm text-slate-600 dark:text-slate-300 mt-4 leading-relaxed">
             {veg.description || 'Farm-fresh produce sourced directly from trusted growers.'}
           </p>
 
           <form onSubmit={handleAddToCart} className="mt-auto pt-5 space-y-4">
             <div>
-              <span className="block text-xs font-semibold text-slate-500 mb-1.5">Quick Select</span>
+              <span className="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1.5">Quick Select</span>
               <div className="flex flex-wrap gap-2">
                 {quickPresets.map((preset) => (
                   <button
@@ -142,7 +142,7 @@ export default function VegetableDetailPage() {
                     className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition ${
                       Number(quantity) === preset
                         ? 'bg-agro-600 text-white border-agro-600'
-                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-agro-50'
+                        : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-agro-50 dark:hover:bg-slate-700'
                     }`}
                   >
                     {preset} {unit}
@@ -153,7 +153,7 @@ export default function VegetableDetailPage() {
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-semibold text-slate-600 mb-1">Quantity</label>
+                <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Quantity</label>
                 <input
                   type="number"
                   step="any"
@@ -161,11 +161,11 @@ export default function VegetableDetailPage() {
                   required
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
-                  className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold focus:ring-2 focus:ring-agro-500 outline-none"
+                  className="w-full px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm font-semibold focus:ring-2 focus:ring-agro-500 outline-none"
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-slate-600 mb-1">Unit</label>
+                <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Unit</label>
                 <select
                   value={unit}
                   onChange={(e) => {
@@ -180,7 +180,7 @@ export default function VegetableDetailPage() {
                     }
                     setUnit(nextUnit);
                   }}
-                  className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold focus:ring-2 focus:ring-agro-500 outline-none"
+                  className="w-full px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm font-semibold focus:ring-2 focus:ring-agro-500 outline-none"
                 >
                   {allowedUnits.map((u) => (
                     <option key={u} value={u}>

@@ -36,8 +36,8 @@ export default function AuditLogsPage() {
     <div className="space-y-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Security & Audit Logs</h1>
-          <p className="text-sm text-slate-500">Immutable trail of administrative actions and financial entries</p>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Security & Audit Logs</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400">Immutable trail of administrative actions and financial entries</p>
         </div>
         <select
           value={entity}

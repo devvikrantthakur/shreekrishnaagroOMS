@@ -76,15 +76,15 @@ export default function CustomerOrderDetailPage() {
         <div>
           <Link
             to="/orders"
-            className="inline-flex items-center gap-1.5 text-sm text-slate-600 hover:text-agro-700 mb-1"
+            className="inline-flex items-center gap-1.5 text-sm text-slate-600 dark:text-slate-400 hover:text-agro-700 dark:hover:text-agro-400 mb-1"
           >
             <ArrowLeft className="w-4 h-4" /> Back to My Orders
           </Link>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-bold text-slate-900">{order.order_number}</h1>
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white">{order.order_number}</h1>
             <StatusBadge status={order.status} />
           </div>
-          <p className="text-xs text-slate-500 mt-0.5">Placed on {formatDateTime(order.created_at)}</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Placed on {formatDateTime(order.created_at)}</p>
         </div>
 
         <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
@@ -96,7 +96,7 @@ export default function CustomerOrderDetailPage() {
                   `Invoice-${activeInvoice.invoice_number}.pdf`
                 )
               }
-              className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs sm:text-sm font-semibold text-slate-700"
+              className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200"
             >
               <FileDown className="w-4 h-4 text-agro-600 shrink-0" /> Invoice PDF
             </button>
@@ -115,33 +115,33 @@ export default function CustomerOrderDetailPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         <div className="lg:col-span-2 space-y-4 sm:space-y-6">
           {/* Items */}
-          <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
-            <div className="px-4 sm:px-5 py-3.5 sm:py-4 border-b border-slate-100 font-bold text-slate-900">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden transition">
+            <div className="px-4 sm:px-5 py-3.5 sm:py-4 border-b border-slate-100 dark:border-slate-800 font-bold text-slate-900 dark:text-white">
               Ordered Vegetables
             </div>
 
             {/* Mobile Item Cards */}
-            <div className="sm:hidden divide-y divide-slate-100">
+            <div className="sm:hidden divide-y divide-slate-100 dark:divide-slate-800">
               {order.items.map((item) => (
                 <div key={item.id} className="p-4 space-y-1.5 text-xs">
                   <div className="flex items-start justify-between gap-2">
-                    <span className="font-semibold text-sm text-slate-900">
+                    <span className="font-semibold text-sm text-slate-900 dark:text-white">
                       {item.vegetable_name_snapshot}
                     </span>
-                    <span className="font-bold text-sm text-slate-900 shrink-0">
+                    <span className="font-bold text-sm text-slate-900 dark:text-white shrink-0">
                       {formatCurrency(item.line_total)}
                     </span>
                   </div>
-                  <div className="flex items-center justify-between text-slate-500">
+                  <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
                     <span>
-                      Ordered: <strong className="text-slate-700">{formatQty(item.quantity, item.unit)}</strong>{' '}
+                      Ordered: <strong className="text-slate-700 dark:text-slate-200">{formatQty(item.quantity, item.unit)}</strong>{' '}
                       ({formatQty(item.base_quantity, item.base_unit)})
                     </span>
                     <span>
                       Rate: {formatCurrency(item.base_unit_price)}/{item.base_unit}
                     </span>
                   </div>
-                  <div className="text-emerald-700 font-medium">
+                  <div className="text-emerald-700 dark:text-emerald-400 font-medium">
                     Delivered: {formatQty(item.delivered_base_quantity, item.base_unit)}
                   </div>
                 </div>
@@ -151,7 +151,7 @@ export default function CustomerOrderDetailPage() {
             {/* Desktop Table */}
             <div className="hidden sm:block overflow-x-auto">
               <table className="w-full text-sm text-left">
-                <thead className="bg-slate-50 text-xs uppercase text-slate-500">
+                <thead className="bg-slate-50 dark:bg-slate-800 text-xs uppercase text-slate-500 dark:text-slate-400">
                   <tr>
                     <th className="px-4 py-3">Vegetable</th>
                     <th className="px-4 py-3 text-right">Ordered</th>
@@ -160,25 +160,25 @@ export default function CustomerOrderDetailPage() {
                     <th className="px-4 py-3 text-right">Total</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                   {order.items.map((item) => (
                     <tr key={item.id}>
-                      <td className="px-4 py-3 font-medium text-slate-900">
+                      <td className="px-4 py-3 font-medium text-slate-900 dark:text-white">
                         {item.vegetable_name_snapshot}
                       </td>
-                      <td className="px-4 py-3 text-right">
+                      <td className="px-4 py-3 text-right text-slate-800 dark:text-slate-200">
                         {formatQty(item.quantity, item.unit)}
                         <span className="block text-[11px] text-slate-400">
                           ({formatQty(item.base_quantity, item.base_unit)})
                         </span>
                       </td>
-                      <td className="px-4 py-3 text-right text-emerald-700 font-medium">
+                      <td className="px-4 py-3 text-right text-emerald-700 dark:text-emerald-400 font-medium">
                         {formatQty(item.delivered_base_quantity, item.base_unit)}
                       </td>
-                      <td className="px-4 py-3 text-right text-slate-600">
+                      <td className="px-4 py-3 text-right text-slate-600 dark:text-slate-400">
                         {formatCurrency(item.base_unit_price)}/{item.base_unit}
                       </td>
-                      <td className="px-4 py-3 text-right font-semibold">
+                      <td className="px-4 py-3 text-right font-semibold text-slate-900 dark:text-white">
                         {formatCurrency(item.line_total)}
                       </td>
                     </tr>
@@ -190,42 +190,42 @@ export default function CustomerOrderDetailPage() {
 
           {/* Deliveries & Payments */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-white rounded-2xl border border-slate-200 p-5">
-              <h3 className="font-bold text-slate-900 flex items-center gap-2 mb-3">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 transition">
+              <h3 className="font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-3">
                 <Truck className="w-4 h-4 text-agro-600" /> Deliveries ({order.deliveries.length})
               </h3>
               {order.deliveries.length === 0 ? (
-                <p className="text-xs text-slate-500">No deliveries dispatched yet.</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">No deliveries dispatched yet.</p>
               ) : (
                 <div className="space-y-2.5">
                   {order.deliveries.map((d) => (
-                    <div key={d.id} className="p-3 rounded-xl bg-slate-50 text-xs">
-                      <div className="flex justify-between font-semibold text-slate-800">
+                    <div key={d.id} className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800 text-xs">
+                      <div className="flex justify-between font-semibold text-slate-800 dark:text-slate-200">
                         <span>{d.delivery_number}</span>
                         <StatusBadge status={d.status} />
                       </div>
-                      <div className="text-slate-500 mt-1">{formatDateTime(d.delivery_date)}</div>
+                      <div className="text-slate-500 dark:text-slate-400 mt-1">{formatDateTime(d.delivery_date)}</div>
                     </div>
                   ))}
                 </div>
               )}
             </div>
 
-            <div className="bg-white rounded-2xl border border-slate-200 p-5">
-              <h3 className="font-bold text-slate-900 flex items-center gap-2 mb-3">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 transition">
+              <h3 className="font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-3">
                 <CreditCard className="w-4 h-4 text-agro-600" /> Payments ({order.payments.length})
               </h3>
               {order.payments.length === 0 ? (
-                <p className="text-xs text-slate-500">No payments recorded yet.</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">No payments recorded yet.</p>
               ) : (
                 <div className="space-y-2.5">
                   {order.payments.map((p) => (
-                    <div key={p.id} className="p-3 rounded-xl bg-slate-50 text-xs">
-                      <div className="flex justify-between font-semibold text-slate-800">
+                    <div key={p.id} className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800 text-xs">
+                      <div className="flex justify-between font-semibold text-slate-800 dark:text-slate-200">
                         <span>{formatCurrency(p.amount)}</span>
                         <StatusBadge status={p.status} />
                       </div>
-                      <div className="text-slate-500 mt-1">
+                      <div className="text-slate-500 dark:text-slate-400 mt-1">
                         {p.payment_method} • {formatDateTime(p.payment_date)}
                       </div>
                     </div>
@@ -238,42 +238,42 @@ export default function CustomerOrderDetailPage() {
 
         {/* Summary & Address */}
         <div className="space-y-4">
-          <div className="bg-white rounded-2xl border border-slate-200 p-5 space-y-2.5 text-sm">
-            <h3 className="font-bold text-slate-900 mb-2">Payment Summary</h3>
-            <div className="flex justify-between text-slate-600">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 space-y-2.5 text-sm transition">
+            <h3 className="font-bold text-slate-900 dark:text-white mb-2">Payment Summary</h3>
+            <div className="flex justify-between text-slate-600 dark:text-slate-300">
               <span>Subtotal</span>
-              <span>{formatCurrency(order.subtotal)}</span>
+              <span className="font-medium text-slate-900 dark:text-white">{formatCurrency(order.subtotal)}</span>
             </div>
-            <div className="flex justify-between text-slate-600">
+            <div className="flex justify-between text-slate-600 dark:text-slate-300">
               <span>Discount</span>
               <span>- {formatCurrency(order.discount_amount)}</span>
             </div>
-            <div className="flex justify-between font-bold text-slate-900 border-t pt-2">
+            <div className="flex justify-between font-bold text-slate-900 dark:text-white border-t border-slate-100 dark:border-slate-800 pt-2">
               <span>Order Total</span>
               <span>{formatCurrency(order.total_amount)}</span>
             </div>
-            <div className="flex justify-between text-emerald-700 font-medium">
+            <div className="flex justify-between text-emerald-700 dark:text-emerald-400 font-medium">
               <span>Net Paid</span>
               <span>{formatCurrency(ps.netPaid)}</span>
             </div>
-            <div className="flex justify-between font-bold text-red-600 border-t pt-2">
+            <div className="flex justify-between font-bold text-red-600 dark:text-red-400 border-t border-slate-100 dark:border-slate-800 pt-2">
               <span>Balance Due</span>
               <span>{formatCurrency(ps.balanceDue)}</span>
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-200 p-5 text-sm">
-            <h3 className="font-bold text-slate-900 flex items-center gap-2 mb-2">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 text-sm transition">
+            <h3 className="font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-2">
               <MapPin className="w-4 h-4 text-agro-600" /> Delivery Address
             </h3>
-            <div className="font-semibold text-slate-800">{addr.recipient_name}</div>
-            <div className="text-slate-600 text-xs mt-1 leading-relaxed">
+            <div className="font-semibold text-slate-800 dark:text-slate-200">{addr.recipient_name}</div>
+            <div className="text-slate-600 dark:text-slate-300 text-xs mt-1 leading-relaxed">
               {addr.address_line1}
               {addr.address_line2 ? `, ${addr.address_line2}` : ''}
               <br />
               {addr.city}, {addr.state} - {addr.pincode}
             </div>
-            <div className="text-xs text-slate-500 mt-2">Phone: {addr.mobile}</div>
+            <div className="text-xs text-slate-500 dark:text-slate-400 mt-2">Phone: {addr.mobile}</div>
           </div>
         </div>
       </div>
@@ -321,7 +321,7 @@ export default function CustomerOrderDetailPage() {
             <button
               type="button"
               onClick={() => setPayModal(false)}
-              className="px-4 py-2 rounded-xl bg-slate-100 text-sm font-medium"
+              className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200/60 dark:border-slate-700 text-sm font-medium transition"
             >
               Cancel
             </button>
